@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marco Service - Premium Top-up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #0a0f1e; color: #ffffff; font-family: sans-serif; scroll-behavior: smooth; }
+        .gold-text { color: #d4af37; }
+        .premium-card { background: linear-gradient(145deg, #161f33, #0f172a); border: 1px solid #1e293b; transition: 0.3s; cursor: pointer; }
+        .premium-card:hover { border-color: #d4af37; transform: translateY(-3px); }
+        .btn-gold { background-color: #d4af37; color: #000; font-weight: bold; }
+        .category-title { border-left: 4px solid #d4af37; padding-left: 10px; margin: 20px 0 10px 0; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <header class="p-6 border-b border-slate-800 text-center sticky top-0 bg-[#0a0f1e] z-40">
+        <h1 class="text-2xl font-bold gold-text underline">MARCO SERVICE</h1>
+        <p class="text-[10px] mt-2 italic text-gray-400">"မင်္ဂလာရှိသောနေ့လေးပါရှင့်၊ ဝယ်ယူအားပေးမှုကို ကျေးဇူးတင်ပါတယ်နော်"</p>
+    </header>
+
+    <div class="p-4 max-w-md mx-auto">
+        <h2 class="category-title text-sky-400">Special Passes & Bundles</h2>
+        <div class="grid grid-cols-2 gap-3">
+            <div class="premium-card p-3 rounded-xl" onclick="openForm('Weekly Pass', '5,750')">
+                <p class="text-[10px] text-sky-400">Weekly Pass</p>
+                <p class="text-xs font-bold">5,750 Ks</p>
+            </div>
+            <div class="premium-card p-3 rounded-xl" onclick="openForm('Twilight Pass', '31,000')">
+                <p class="text-[10px] text-purple-400">Twilight Pass</p>
+                <p class="text-xs font-bold">31,000 Ks</p>
+            </div>
+            <div class="premium-card p-3 rounded-xl" onclick="openForm('Weekly Elite', '3,150')">
+                <p class="text-[10px] text-green-400">Weekly Elite</p>
+                <p class="text-xs font-bold">3,150 Ks</p>
+            </div>
+            <div class="premium-card p-3 rounded-xl" onclick="openForm('Monthly Epic', '15,700')">
+                <p class="text-[10px] text-orange-400">Monthly Epic</p>
+                <p class="text-xs font-bold">15,700 Ks</p>
+            </div>
+        </div>
+
+        <h2 class="category-title text-green-400">2x Recharge Diamond 💎</h2>
+        <div class="grid grid-cols-2 gap-3">
+            <div class="premium-card p-3 rounded-xl" onclick="openForm('50+50 Diamonds', '3,100')">
+                <p class="text-xs">50+50 Diagonals</p>
+                <p class="gold-text text-xs">3,100 Ks</p>
+            </div>
+            <div class="premium-card p-3 rounded-xl" onclick="openForm('500+500 Diamonds', '30,500')">
+                <p class="text-xs">500+500 Diagonals</p>
+                <p class="gold-text text-xs">30,500 Ks</p>
+            </div>
+        </div>
+
+        <h2 class="category-title gold-text">Normal Diamond 💎</h2>
+        <div class="grid grid-cols-2 gap-3 mb-10">
+            <div class="premium-card p-3 rounded-xl" onclick="openForm('86 Diamonds', '4,800')">
+                <p class="text-xs">86 Diamonds</p>
+                <p class="gold-text text-xs">4,800 Ks</p>
+            </div>
+            <div class="premium-card p-3 rounded-xl" onclick="openForm('172 Diamonds', '9,650')">
+                <p class="text-xs">172 Diamonds</p>
+                <p class="gold-text text-xs">9,650 Ks</p>
+            </div>
+            <div class="premium-card p-3 rounded-xl" onclick="openForm('706 Diamonds', '37,500')">
+                <p class="text-xs">706 Diamonds</p>
+                <p class="gold-text text-xs">37,500 Ks</p>
+            </div>
+            <div class="premium-card p-3 rounded-xl" onclick="openForm('9288 Diamonds', '479,000')">
+                <p class="text-xs text-[10px]">9288 Diamonds</p>
+                <p class="gold-text text-xs">479,000 Ks</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="orderModal" class="fixed inset-0 bg-black/95 hidden flex items-center justify-center p-6 z-50">
+        <div class="bg-slate-900 p-6 rounded-2xl border border-slate-700 w-full max-w-sm">
+            <h3 class="gold-text font-bold mb-2">အော်ဒါတင်ရန်</h3>
+            <p id="selectedPkg" class="text-[10px] mb-4 text-gray-400"></p>
+            <form id="topupForm" class="space-y-4">
+                <input type="text" name="username" placeholder="နာမည်" class="w-full bg-slate-800 p-3 rounded-lg text-sm outline-none border border-slate-700" required>
+                <div class="flex gap-2">
+                    <input type="text" name="user_id" placeholder="ID" class="w-2/3 bg-slate-800 p-3 rounded-lg text-sm outline-none border border-slate-700" required>
+                    <input type="text" name="zone_id" placeholder="Zone" class="w-1/3 bg-slate-800 p-3 rounded-lg text-sm outline-none border border-slate-700" required>
+                </div>
+                <input type="hidden" id="packageInput" name="package">
+                <div class="text-[10px] text-gray-400 p-3 bg-blue-900/20 rounded-lg border border-blue-800/30">
+                    KPay: 0989482838 (Thar Htoo Aung)<br>Wave: 0989482838 (Hla Min Aung)
+                </div>
+                <p class="text-[10px]">ငွေလွှဲပြေစာတင်ပေးပါ</p>
+                <input type="file" name="screenshot" accept="image/*" class="text-[10px]" required>
+                <button type="submit" class="w-full btn-gold py-3 rounded-xl shadow-lg shadow-yellow-500/20">အော်ဒါအတည်ပြုမည်</button>
+                <button type="button" onclick="closeForm()" class="w-full text-gray-500 text-xs mt-2">ပိတ်မည်</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openForm(pkg, price) {
+            document.getElementById('packageInput').value = pkg + " (" + price + " Ks)";
+            document.getElementById('selectedPkg').innerText = "ရွေးချယ်ထားသောပစ္စည်း: " + pkg + " - " + price + " Ks";
+            document.getElementById('orderModal').classList.remove('hidden');
+        }
+        function closeForm() {
+            document.getElementById('orderModal').classList.add('hidden');
+        }
+        document.getElementById('topupForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            try {
+                // Render မှာတင်ပြီးရင် ရလာတဲ့ URL ကို အောက်ကနေရာမှာ အစားထိုးပါ
+                const response = await fetch('/submit-order', { method: 'POST', body: formData });
+                if (response.ok) alert('အော်ဒါတင်ခြင်း အောင်မြင်ပါတယ်ရှင့်! ခဏစောင့်ပေးပါနော်။');
+                else alert('အမှားအယွင်းတစ်ခု ရှိနေပါတယ်၊ ပြန်စမ်းကြည့်ပါဦး။');
+            } catch (err) { alert('Backend နှင့် ချိတ်ဆက်မရပါ (Render Deployment လိုအပ်သည်)'); }
+        };
+    </script>
+</body>
+</html>
